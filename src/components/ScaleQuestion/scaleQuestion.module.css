@@ -1,0 +1,51 @@
+.container {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.scaleContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.scale {
+  background: #f2f3f4;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  width: 74px;
+  height: 74px;
+  cursor: pointer;
+}
+
+.oldActive {
+  opacity: 0.6;
+}
+
+.scaleValue {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #031323;
+  text-align: right;
+  margin-right: 3px;
+  margin-top: 7px;
+}
+
+.scaleContainerDisplay {
+  display: flex;
+  flex-direction: row;
+}
+
+.scaleDisplay {
+  background: #f2f3f4;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  width: 33px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.active {
+  background: #ab61e5;
+}
