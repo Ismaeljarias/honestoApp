@@ -1,0 +1,40 @@
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 31px;
+  line-height: 42px;
+  color: #031323;
+  margin-bottom: 5px;
+}
+
+.info {
+  font-size: 16px;
+  line-height: 22px;
+  color: #59636e;
+  margin-bottom: 16px;
+}
+
+.users {
+  border: var(--baseBorder);
+  list-style-type: none;
+}
+
+.user {
+  align-items: center;
+  border-bottom: var(--baseBorder);
+  display: flex;
+  padding: 1rem;
+}
+
+.user:hover {
+  background-color: var(--primaryLightColor);
+}
+
+.user:last-child {
+  border-bottom: none;
+}

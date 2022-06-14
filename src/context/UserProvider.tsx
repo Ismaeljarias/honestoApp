@@ -25,8 +25,12 @@ const UIProvider = ({ children }: { children: React.ReactNode }): any => {
 
   console.log('users', state)
 
+  const getSelectedUser = (userId: string) => {
+    return state?.find((user) => user.id === userId)
+  }
+
   return (
-    <DispatchUserContext.Provider value={dispatch}>
+    <DispatchUserContext.Provider value={{ dispatch, getSelectedUser }}>
       <UserContext.Provider value={state}>{children}</UserContext.Provider>
     </DispatchUserContext.Provider>
   )

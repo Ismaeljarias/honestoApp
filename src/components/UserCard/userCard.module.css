@@ -1,0 +1,41 @@
+.userText {
+  font-weight: var(--fw-bold);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #59636e;
+  padding: 11px 13px;
+}
+
+.users {
+  list-style-type: none;
+  border-right: var(--baseBorder);
+}
+
+.userList {
+  list-style-type: none;
+}
+
+.userButton {
+  padding: 1rem;
+  width: 100%;
+  background: #ffffff;
+  cursor: pointer;
+  border: 0;
+}
+
+.userButton:hover {
+  background: #fbf7fe;
+}
+
+.activeUser {
+  background: #f2f3f4;
+}
+
+@media (max-width: 767px) {
+  .userList {
+    height: 150px;
+    overflow-y: scroll;
+  }
+}

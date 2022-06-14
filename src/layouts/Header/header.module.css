@@ -34,3 +34,21 @@
   border-right: var(--baseBorder);
   flex: 1;
 }
+
+.navlink {
+  position: relative;
+  padding-right: 10px;
+}
+
+.badge {
+  background: #ab61e5;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 15px;
+  color: #ffffff;
+  padding: 1px 5px 0px 5px;
+  position: absolute;
+  top: 15px;
+  right: 0;
+}

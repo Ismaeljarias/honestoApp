@@ -11,6 +11,19 @@
   transition: var(--animDuration) var(--animEase);
 }
 
+button:disabled {
+  background-color: #acb1b6;
+  border-color: #acb1b6;
+  color: var(--primaryLightColor);
+  cursor: unset;
+}
+
+button:disabled:hover {
+  background-color: #acb1b6;
+  border-color: #acb1b6;
+  color: var(--primaryLightColor);
+}
+
 .button:hover {
   background-color: var(--copyLightColor);
   border-color: var(--primaryColor);

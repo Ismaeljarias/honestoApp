@@ -8,13 +8,16 @@ import GiveFeedback from '../views/GiveFeedback'
 import Home from '../views/Home'
 import http from '../common/http'
 import NotFound from '../views/NotFound'
-import ReviewFeedback from '../views/ReviewFeedback'
 import { AccountContext } from '../context/AccountProvider'
 import PrivateRoute from '../components/Routing/PrivateRoute'
+import { GiveUserFeedback } from '../views/GiveUserFeedback'
+import ThankYouForSharingFeedback from '../views/ThankYouForSharingFeedback'
+import UserFeedback from '../views/UserFeedback/index'
+import ViewSubmissions from '../views/ViewSubmissions'
 
 const App = () => {
   const currentUser = React.useContext(AccountContext)
-  const userDispatch = React.useContext(DispatchUserContext)
+  const { dispatch: userDispatch } = React.useContext(DispatchUserContext)
   const questionDispatch = React.useContext(DispatchQuestionContext)
   const isLoggedIn = currentUser != null
 
@@ -43,10 +46,28 @@ const App = () => {
             <Home />
           </Route>
           <PrivateRoute isLoggedIn={isLoggedIn} exact path="/my-feedback">
-            <ReviewFeedback />
+            <UserFeedback />
           </PrivateRoute>
           <PrivateRoute isLoggedIn={isLoggedIn} exact path="/share-feedback">
             <GiveFeedback />
+          </PrivateRoute>
+          <PrivateRoute
+            isLoggedIn={isLoggedIn}
+            path="/share-feedback/user/:userId"
+          >
+            <GiveUserFeedback />
+          </PrivateRoute>
+          <PrivateRoute
+            isLoggedIn={isLoggedIn}
+            path="/share-feedback/thank-you"
+          >
+            <ThankYouForSharingFeedback />
+          </PrivateRoute>
+          <PrivateRoute
+            isLoggedIn={isLoggedIn}
+            path="/share-feedback/submissions/:userId"
+          >
+            <ViewSubmissions />
           </PrivateRoute>
           <PrivateRoute isLoggedIn={isLoggedIn} exact path="/components">
             <Components />
