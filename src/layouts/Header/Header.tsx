@@ -13,18 +13,10 @@ const Header = () => {
   const logoutUser = React.useContext(DispatchAccountContext)
   const feedbacks = React.useContext(FeedbackContext)
 
-  const newFeedbacksCount = React.useMemo(() => {
-    return feedbacks
-      ? feedbacks.filter(
-          (feedback) => feedback.to.id === currentUser?.id && !feedback.read,
-        ).length
-      : 0
-  }, [currentUser?.id, feedbacks])
-
   const myFeedbacksCount = React.useMemo(() => {
     return feedbacks
       ? feedbacks.filter(
-          (feedback) => feedback.from.id === currentUser?.id && !feedback.read,
+          (feedback) => feedback.to.id === currentUser?.id && !feedback.read,
         ).length
       : 0
   }, [currentUser?.id, feedbacks])
@@ -39,13 +31,7 @@ const Header = () => {
       <NavLink to="/share-feedback" activeClassName={styles.active}>
         Share Feedback
       </NavLink>
-      <NavLink
-        exact
-        to="/my-feedback"
-        activeClassName={styles.active}
-        className={styles.navlink}
-      >
-        {!!myFeedbacksCount && <Badge unreadFeedbacks={myFeedbacksCount} />}
+      <NavLink exact to="/my-feedback" activeClassName={styles.active}>
         <span>My Feedback</span>
       </NavLink>
       <NavLink
@@ -54,7 +40,7 @@ const Header = () => {
         activeClassName={styles.active}
         className={styles.navlink}
       >
-        {!!newFeedbacksCount && <Badge unreadFeedbacks={newFeedbacksCount} />}
+        {!!myFeedbacksCount && <Badge unreadFeedbacks={myFeedbacksCount} />}
         <span>Team Feedback</span>
       </NavLink>
       <span className={styles.spacer} />

@@ -49,7 +49,7 @@ const UserCard = (props: UserCardProps) => {
                   key={feedbackData}
                   name={selectedUserName}
                   avatarUrl={selectedUserPic}
-                  newFeedback={!feedback.read}
+                  newFeedback={isFrom && !feedback.read}
                 />
               </button>
             </li>
