@@ -12,7 +12,6 @@ export const useFeedback = (isTeam = false) => {
   const { dispatch } = React.useContext(DispatchFeedbackContext)
 
   const [givenFeedbacks, setGivenFeedbacks] = React.useState<FeedbackT[]>([])
-
   const [selectedUserFeedback, setSelectedUserFeedback] =
     React.useState<FeedbackT | null>(null)
 
@@ -24,31 +23,19 @@ export const useFeedback = (isTeam = false) => {
       return fromTo === currentUser?.id
     })
     setGivenFeedbacks(filteredFeedbacks ? filteredFeedbacks : [])
-    const selectedFeedback =
-      filteredFeedbacks && filteredFeedbacks.length > 0
-        ? filteredFeedbacks[0]
-        : null
-
-    setSelectedUserFeedback(selectedFeedback)
-    if (selectedFeedback && !selectedFeedback.read && !isTeam) {
-      dispatch({
-        action: 'read',
-        payload: selectedFeedback,
-      })
-    }
   }, [currentUser?.id, dispatch, feedbacks, isTeam])
 
   const changeUserFeedback = React.useCallback(
     (feedback: FeedbackT) => {
       setSelectedUserFeedback(feedback)
-      if (selectedUserFeedback && !selectedUserFeedback.read && !isTeam) {
+      if (feedback.read === false && !isTeam) {
         dispatch({
           action: 'read',
-          payload: selectedUserFeedback,
+          payload: feedback,
         })
       }
     },
-    [dispatch, isTeam, selectedUserFeedback],
+    [dispatch, isTeam],
   )
 
   return {

@@ -4,7 +4,8 @@ import classnames from 'classnames'
 import styles from './userCard.module.css'
 
 type UserCardProps = {
-  givenFeedbacks: FeedbackT[]
+  index: any
+  feedback: FeedbackT
   changeUserFeedback: (feedback: FeedbackT) => void
   selectedUserFeedback: FeedbackT | null
   isFrom?: boolean
@@ -12,7 +13,8 @@ type UserCardProps = {
 
 const UserCard = (props: UserCardProps) => {
   const {
-    givenFeedbacks,
+    index,
+    feedback,
     selectedUserFeedback,
     isFrom = false,
     changeUserFeedback,
@@ -26,37 +28,26 @@ const UserCard = (props: UserCardProps) => {
     changeUserFeedback(feedback)
   }
 
-  return (
-    <div className={styles.users}>
-      <h4 className={styles.userText}>Feedback Received</h4>
-      <ul className={styles.userList}>
-        {givenFeedbacks.map((feedback, index) => {
-          let feedbackData = !isFrom ? feedback.to.id : feedback.from.id
-          let selectedUserName = isFrom ? feedback.from.name : feedback.to.name
-          let selectedUserPic = isFrom
-            ? feedback.from.avatarUrl
-            : feedback.to.avatarUrl
+  let feedbackData = !isFrom ? feedback.to.id : feedback.from.id
+  let selectedUserName = isFrom ? feedback.from.name : feedback.to.name
+  let selectedUserPic = isFrom ? feedback.from.avatarUrl : feedback.to.avatarUrl
 
-          return (
-            <li key={`feedback-${index}`}>
-              <button
-                className={classnames(styles.userButton, {
-                  [styles.activeUser]: selectedUserData === feedbackData,
-                })}
-                onClick={() => handleUserChange(feedback)}
-              >
-                <User
-                  key={feedbackData}
-                  name={selectedUserName}
-                  avatarUrl={selectedUserPic}
-                  newFeedback={isFrom && !feedback.read}
-                />
-              </button>
-            </li>
-          )
+  return (
+    <li key={`user-feedback-${index}`}>
+      <button
+        className={classnames(styles.userButton, {
+          [styles.activeUser]: selectedUserData === feedbackData,
         })}
-      </ul>
-    </div>
+        onClick={() => handleUserChange(feedback)}
+      >
+        <User
+          key={feedbackData}
+          name={selectedUserName}
+          avatarUrl={selectedUserPic}
+          newFeedback={isFrom && !feedback.read}
+        />
+      </button>
+    </li>
   )
 }
 

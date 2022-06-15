@@ -1,35 +1,3 @@
-.userText {
-  font-weight: var(--fw-bold);
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #59636e;
-  padding: 11px 13px;
-}
-
-.users {
-  list-style-type: none;
-}
-
-.userList {
-  list-style-type: none;
-  border-top: var(--baseBorder);
-  border-bottom: var(--baseBorder);
-  position: relative;
-}
-
-.userList li {
-  align-items: center;
-  border-bottom: var(--baseBorder);
-  display: flex;
-  position: relative;
-}
-
-.userList:last-child {
-  border-bottom: none;
-}
-
 .userButton {
   padding: 1rem;
   width: 100%;
@@ -44,11 +12,4 @@
 
 .activeUser {
   background: #f2f3f4;
-}
-
-@media (max-width: 767px) {
-  .userList {
-    height: 150px;
-    overflow-y: scroll;
-  }
 }
