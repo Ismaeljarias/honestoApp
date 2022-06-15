@@ -14,6 +14,7 @@ import { GiveUserFeedback } from '../views/GiveUserFeedback'
 import ThankYouForSharingFeedback from '../views/ThankYouForSharingFeedback'
 import UserFeedback from '../views/UserFeedback/index'
 import ViewSubmissions from '../views/ViewSubmissions'
+import TeamFeedback from '../views/TeamFeedback'
 
 const App = () => {
   const currentUser = React.useContext(AccountContext)
@@ -68,6 +69,9 @@ const App = () => {
             path="/share-feedback/submissions/:userId"
           >
             <ViewSubmissions />
+          </PrivateRoute>
+          <PrivateRoute isLoggedIn={isLoggedIn} exact path="/team-feedback">
+            <TeamFeedback />
           </PrivateRoute>
           <PrivateRoute isLoggedIn={isLoggedIn} exact path="/components">
             <Components />
