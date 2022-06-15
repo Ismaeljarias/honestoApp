@@ -32,6 +32,10 @@ const UserCard = (props: UserCardProps) => {
       <ul className={styles.userList}>
         {givenFeedbacks.map((feedback, index) => {
           let feedbackData = !isFrom ? feedback.to.id : feedback.from.id
+          let selectedUserName = isFrom ? feedback.from.name : feedback.to.name
+          let selectedUserPic = isFrom
+            ? feedback.from.avatarUrl
+            : feedback.to.avatarUrl
 
           return (
             <li key={`feedback-${index}`}>
@@ -42,9 +46,9 @@ const UserCard = (props: UserCardProps) => {
                 onClick={() => handleUserChange(feedback)}
               >
                 <User
-                  key={feedback.to.id}
-                  name={feedback.to.name}
-                  avatarUrl={feedback.to.avatarUrl}
+                  key={feedbackData}
+                  name={selectedUserName}
+                  avatarUrl={selectedUserPic}
                   newFeedback={!feedback.read}
                 />
               </button>

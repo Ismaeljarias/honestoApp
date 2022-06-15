@@ -59,6 +59,11 @@ const Header = () => {
       </NavLink>
       <span className={styles.spacer} />
       <NavLink exact to="/" onClick={handleLogout}>
+        <img
+          src={currentUser?.avatarUrl}
+          alt="User Avatar"
+          className={styles.avatar}
+        />
         <div className={styles.userHeader}>
           <span className={styles.username}>
             {currentUser && `${currentUser.name}`}

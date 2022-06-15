@@ -40,6 +40,12 @@
   padding-right: 10px;
 }
 
+.avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 29px;
+}
+
 .userHeader {
   display: flex;
   flex-direction: column;
