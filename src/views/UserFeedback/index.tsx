@@ -5,6 +5,7 @@ import UserCard from '../../components/UserCard'
 import FeedbackDetail from '../../components/feedbackDetail'
 import { useFeedback } from '../../hooks/useFeedback'
 import React from 'react'
+import PleaseSelect from '../../components/PleaseSelect'
 
 const UserFeedback = () => {
   const { givenFeedbacks, changeUserFeedback, selectedUserFeedback } =
@@ -30,19 +31,36 @@ const UserFeedback = () => {
         <div className={styles.wrapper}>
           <h1 className={styles.title}>My Feedback</h1>
           <div className={styles.feedbackContainer}>
-            <UserCard
-              givenFeedbacks={givenFeedbacks}
-              changeUserFeedback={changeUserFeedback}
-              selectedUserFeedback={selectedUserFeedback}
-            />
+            <div className={styles.users}>
+              <h4 className={styles.userText}>Feedback Received</h4>
+              <ul className={styles.userList}>
+                {givenFeedbacks.map((feedback, index) => {
+                  return (
+                    <React.Fragment key={`UserFeedback-${index}`}>
+                      <UserCard
+                        index={index}
+                        feedback={feedback}
+                        isFrom={false}
+                        changeUserFeedback={changeUserFeedback}
+                        selectedUserFeedback={selectedUserFeedback}
+                      />
+                    </React.Fragment>
+                  )
+                })}
+              </ul>
+            </div>
             <div className={styles.userFeedback}>
-              <span className={styles.feedbackUserName}>
-                {selectedUserFeedback?.to.name}'s Feedback
-              </span>
-              {selectedUserFeedback &&
-                selectedUserFeedback.questionAnswers.length > 0 && (
+              {selectedUserFeedback ? (
+                <>
+                  <span className={styles.feedbackUserName}>
+                    {selectedUserFeedback &&
+                      `${selectedUserFeedback?.from.name} 's Feedback`}
+                  </span>
                   <FeedbackDetail selectedUserFeedback={selectedUserFeedback} />
-                )}
+                </>
+              ) : (
+                <PleaseSelect />
+              )}
             </div>
           </div>
         </div>
