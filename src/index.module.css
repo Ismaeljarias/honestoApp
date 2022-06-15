@@ -1,14 +1,14 @@
 :root {
-  --lightGrey: #F2F3F4;
+  --lightGrey: #f2f3f4;
   /* COLORS */
-  --white: #FFFFFF;
+  --white: #ffffff;
   --black: #000000;
   --accentColor: #201d29;
-  --borderColor: #D6D6D6;
+  --borderColor: #d6d6d6;
   --copyColor: #333333;
   --copyDarkColor: var(--black);
   --copyLightColor: var(--white);
-  --primaryColor: #AB61E5;
+  --primaryColor: #ab61e5;
   --primaryLightColor: #faf5ff;
   --primaryMediumColor: #e7e2f8;
 
@@ -55,11 +55,20 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
   margin: 0 0 0.45em;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   color: var(--copyDarkColor);
 }
 
@@ -83,6 +92,7 @@ h3 {
 
 p {
   font-weight: var(--fw-regular);
+  margin: 0;
 }
 
 a {

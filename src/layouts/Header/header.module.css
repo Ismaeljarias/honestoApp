@@ -40,15 +40,25 @@
   padding-right: 10px;
 }
 
-.badge {
-  background: #ab61e5;
-  border-radius: 50%;
-  font-weight: 600;
-  font-size: 11px;
-  line-height: 15px;
-  color: #ffffff;
-  padding: 1px 5px 0px 5px;
-  position: absolute;
-  top: 15px;
-  right: 0;
+.userHeader {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.username {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: normal;
+  color: #031323;
+}
+
+.logout {
+  font-weight: var(--fw-bold);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #59636e;
+  margin-left: 2px;
 }

@@ -6,13 +6,14 @@ import {
   DispatchAccountContext,
 } from '../../context/AccountProvider'
 import { FeedbackContext } from '../../context/FeedbackProvider'
+import Badge from '../../components/Badge'
 
 const Header = () => {
   const currentUser = React.useContext(AccountContext)
   const logoutUser = React.useContext(DispatchAccountContext)
   const feedbacks = React.useContext(FeedbackContext)
 
-  const unreadFeedbacks = React.useMemo(() => {
+  const newFeedbacksCount = React.useMemo(() => {
     return feedbacks
       ? feedbacks.filter(
           (feedback) => feedback.to.id === currentUser?.id && !feedback.read,
@@ -20,7 +21,13 @@ const Header = () => {
       : 0
   }, [currentUser?.id, feedbacks])
 
-  console.log('current user', currentUser)
+  const myFeedbacksCount = React.useMemo(() => {
+    return feedbacks
+      ? feedbacks.filter(
+          (feedback) => feedback.from.id === currentUser?.id && !feedback.read,
+        ).length
+      : 0
+  }, [currentUser?.id, feedbacks])
 
   const handleLogout = () => {
     logoutUser({ action: 'logout' })
@@ -32,8 +39,14 @@ const Header = () => {
       <NavLink to="/share-feedback" activeClassName={styles.active}>
         Share Feedback
       </NavLink>
-      <NavLink exact to="/my-feedback" activeClassName={styles.active}>
-        My Feedback
+      <NavLink
+        exact
+        to="/my-feedback"
+        activeClassName={styles.active}
+        className={styles.navlink}
+      >
+        {!!myFeedbacksCount && <Badge unreadFeedbacks={myFeedbacksCount} />}
+        <span>My Feedback</span>
       </NavLink>
       <NavLink
         exact
@@ -41,14 +54,17 @@ const Header = () => {
         activeClassName={styles.active}
         className={styles.navlink}
       >
-        {!!unreadFeedbacks && (
-          <span className={styles.badge}>{unreadFeedbacks}</span>
-        )}
+        {!!newFeedbacksCount && <Badge unreadFeedbacks={newFeedbacksCount} />}
         <span>Team Feedback</span>
       </NavLink>
       <span className={styles.spacer} />
       <NavLink exact to="/" onClick={handleLogout}>
-        Logout {currentUser && `${currentUser.name}`}
+        <div className={styles.userHeader}>
+          <span className={styles.username}>
+            {currentUser && `${currentUser.name}`}
+          </span>
+          <span className={styles.logout}>Logout</span>
+        </div>
       </NavLink>
     </div>
   )

@@ -10,11 +10,24 @@
 
 .users {
   list-style-type: none;
-  border-right: var(--baseBorder);
 }
 
 .userList {
   list-style-type: none;
+  border-top: var(--baseBorder);
+  border-bottom: var(--baseBorder);
+  position: relative;
+}
+
+.userList li {
+  align-items: center;
+  border-bottom: var(--baseBorder);
+  display: flex;
+  position: relative;
+}
+
+.userList:last-child {
+  border-bottom: none;
 }
 
 .userButton {
