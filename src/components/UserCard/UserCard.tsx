@@ -28,7 +28,7 @@ const UserCard = (props: UserCardProps) => {
 
   return (
     <div className={styles.users}>
-      <h4 className={styles.userText}>Feedback given</h4>
+      <h4 className={styles.userText}>Feedback Received</h4>
       <ul className={styles.userList}>
         {givenFeedbacks.map((feedback, index) => {
           let feedbackData = !isFrom ? feedback.to.id : feedback.from.id
@@ -49,7 +49,7 @@ const UserCard = (props: UserCardProps) => {
                   key={feedbackData}
                   name={selectedUserName}
                   avatarUrl={selectedUserPic}
-                  newFeedback={!feedback.read}
+                  newFeedback={isFrom && !feedback.read}
                 />
               </button>
             </li>
