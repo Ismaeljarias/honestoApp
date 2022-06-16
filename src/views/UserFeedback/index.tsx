@@ -5,17 +5,25 @@ import UserCard from '../../components/UserCard'
 import FeedbackDetail from '../../components/feedbackDetail'
 import { useFeedback } from '../../hooks/useFeedback'
 import React from 'react'
-import PleaseSelect from '../../components/PleaseSelect'
+import { FeedbackT } from '../../context/FeedbackProvider'
 
 const UserFeedback = () => {
   const { givenFeedbacks, changeUserFeedback, selectedUserFeedback } =
     useFeedback(true)
 
+  const [localUserFeedback, setLocalUserFeedback] =
+    React.useState<FeedbackT | null>(null)
   const contentLoaded = React.useRef(false)
 
   React.useEffect(() => {
     contentLoaded.current = true
-  }, [])
+
+    if (!selectedUserFeedback) {
+      setLocalUserFeedback(givenFeedbacks[0])
+    } else {
+      setLocalUserFeedback(selectedUserFeedback)
+    }
+  }, [givenFeedbacks, selectedUserFeedback])
 
   if (!contentLoaded.current)
     return (
@@ -42,7 +50,7 @@ const UserFeedback = () => {
                         feedback={feedback}
                         isFrom={false}
                         changeUserFeedback={changeUserFeedback}
-                        selectedUserFeedback={selectedUserFeedback}
+                        selectedUserFeedback={localUserFeedback}
                       />
                     </React.Fragment>
                   )
@@ -50,16 +58,14 @@ const UserFeedback = () => {
               </ul>
             </div>
             <div className={styles.userFeedback}>
-              {selectedUserFeedback ? (
+              {localUserFeedback && (
                 <>
                   <span className={styles.feedbackUserName}>
-                    {selectedUserFeedback &&
-                      `${selectedUserFeedback?.from.name} 's Feedback`}
+                    {localUserFeedback &&
+                      `${localUserFeedback?.from.name} 's Feedback`}
                   </span>
-                  <FeedbackDetail selectedUserFeedback={selectedUserFeedback} />
+                  <FeedbackDetail selectedUserFeedback={localUserFeedback} />
                 </>
-              ) : (
-                <PleaseSelect />
               )}
             </div>
           </div>

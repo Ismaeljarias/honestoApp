@@ -5,17 +5,35 @@ import UserCard from '../../components/UserCard'
 import FeedbackDetail from '../../components/feedbackDetail'
 import { useFeedback } from '../../hooks/useFeedback'
 import React from 'react'
-import PleaseSelect from '../../components/PleaseSelect'
+import {
+  DispatchFeedbackContext,
+  FeedbackT,
+} from '../../context/FeedbackProvider'
 
 const TeamFeedback = () => {
   const { givenFeedbacks, changeUserFeedback, selectedUserFeedback } =
     useFeedback(false)
+  const { dispatch } = React.useContext(DispatchFeedbackContext)
 
+  const [localUserFeedback, setLocalUserFeedback] =
+    React.useState<FeedbackT | null>(null)
   const contentLoaded = React.useRef(false)
 
   React.useEffect(() => {
     contentLoaded.current = true
-  }, [])
+
+    if (!selectedUserFeedback) {
+      setLocalUserFeedback(givenFeedbacks[0])
+      if (localUserFeedback?.read === false) {
+        dispatch({
+          action: 'read',
+          payload: localUserFeedback,
+        })
+      }
+    } else {
+      setLocalUserFeedback(selectedUserFeedback)
+    }
+  }, [dispatch, givenFeedbacks, localUserFeedback, selectedUserFeedback])
 
   if (!contentLoaded.current)
     return (
@@ -45,7 +63,7 @@ const TeamFeedback = () => {
                         feedback={feedback}
                         isFrom={true}
                         changeUserFeedback={changeUserFeedback}
-                        selectedUserFeedback={selectedUserFeedback}
+                        selectedUserFeedback={localUserFeedback}
                       />
                     </React.Fragment>
                   )
@@ -53,16 +71,14 @@ const TeamFeedback = () => {
               </ul>
             </div>
             <div className={styles.userFeedback}>
-              {selectedUserFeedback ? (
+              {localUserFeedback && (
                 <>
                   <span className={styles.feedbackUserName}>
-                    {selectedUserFeedback &&
-                      `${selectedUserFeedback?.from.name} 's Feedback`}
+                    {localUserFeedback &&
+                      `${localUserFeedback?.from.name} 's Feedback`}
                   </span>
-                  <FeedbackDetail selectedUserFeedback={selectedUserFeedback} />
+                  <FeedbackDetail selectedUserFeedback={localUserFeedback} />
                 </>
-              ) : (
-                <PleaseSelect />
               )}
             </div>
           </div>
