@@ -24,6 +24,10 @@ const Header = () => {
   const handleLogout = () => {
     logoutUser({ action: 'logout' })
   }
+  const initials = currentUser?.name
+    .split(' ')
+    .map((word) => word[0])
+    .join('')
 
   return (
     <div className={styles.header}>
@@ -45,11 +49,16 @@ const Header = () => {
       </NavLink>
       <span className={styles.spacer} />
       <NavLink exact to="/" onClick={handleLogout}>
-        <img
-          src={currentUser?.avatarUrl}
-          alt="User Avatar"
-          className={styles.avatar}
-        />
+        {currentUser?.avatarUrl ? (
+          <img
+            src={currentUser?.avatarUrl}
+            alt="User Avatar"
+            className={styles.avatar}
+          />
+        ) : (
+          <span className={styles.avatar}>{initials}</span>
+        )}
+
         <div className={styles.userHeader}>
           <span className={styles.username}>
             {currentUser && `${currentUser.name}`}

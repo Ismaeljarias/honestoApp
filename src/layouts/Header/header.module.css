@@ -40,10 +40,24 @@
   padding-right: 10px;
 }
 
+.initials,
 .avatar {
-  width: 58px;
+  border-radius: 50%;
+  border: var(--baseBorder);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 58px;
-  border-radius: 29px;
+  width: 58px;
+  background-color: white;
+}
+
+.initials {
+  align-items: center;
+  background-color: var(--primaryLightColor);
+  display: flex;
+  font-size: var(--fs-xl);
+  justify-content: center;
 }
 
 .userHeader {
