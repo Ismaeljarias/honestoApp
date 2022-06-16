@@ -62,7 +62,7 @@ const UserFeedback = () => {
                 <>
                   <span className={styles.feedbackUserName}>
                     {localUserFeedback &&
-                      `${localUserFeedback?.from.name} 's Feedback`}
+                      `${localUserFeedback?.to.name} 's Feedback`}
                   </span>
                   <FeedbackDetail selectedUserFeedback={localUserFeedback} />
                 </>
